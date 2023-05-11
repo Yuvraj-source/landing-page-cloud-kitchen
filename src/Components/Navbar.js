@@ -1,58 +1,161 @@
-import React from "react";
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import { orange } from "@mui/material/colors";
-import Logo from "../Assets/Logo.png";
+import React, { useState } from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Button from "@mui/material/Button";
+import {
+
+  Home as HomeIcon,
+  Info as InfoIcon,
+  CommentRounded as CommentRoundedIcon,
+
+} from "@mui/icons-material";
 
 const Navbar = () => {
-  const handleButtonClick = (path) => {
-    // Implement your navigation logic here
-    console.log("Navigating to:", path);
-  };
+  const [openMenu, setOpenMenu] = useState(null);
+  const menuOptions = [
+    {
+      text: "Knowledge Hub",
+      icon: <HomeIcon />,
+      submenus: [
+        {
+          text: "Notes",
+          link: "#",
+        },
+        {
+          text: "Quiz",
+          link: "#",
+        },
+        {
+          text: "Microbiology News",
+          link: "#",
+        },
+      ],
+    },
+    {
+      text: "Career Pathways",
+      icon: <InfoIcon />,
+      submenus: [
+        {
+          text: "Jobs",
+          link: "#",
+        },
+        {
+          text: "College Finder",
+          link: "#",
+        },
+        {
+          text: "Exam Notification",
+          link: "#",
+        },
+      ],
+    },
+    {
+      text: "Engage and Connect",
+      icon: <CommentRoundedIcon />,
+      submenus: [
+        {
+          text: "Discussion Forum",
+          link: "#",
+        },
+        {
+          text: "Projects Collaborations",
+          link: "#",
+        },
+        {
+          text: "Members Directory",
+          link: "#",
+        },
+      ],
+    },
+    {
+      text: " Explore and Discover",
+      icon: <CommentRoundedIcon />,
+      submenus: [
+        {
+          text: "Conferences",
+          link: "#",
+        },
+        {
+          text: " Workshops and Webinars",
+          link: "#",
+        },
+        {
+          text: " Mentorship Programs",
+          link: "#",
+        },
+      ],
+    },
+    
+  ];
 
   return (
-    <AppBar position="static" color="primary" style={{ backgroundColor: orange[500], borderRadius: "20px" }}>
-      <Toolbar>
-        <Box sx={{ display: "flex", justifyContent: "center", flexGrow: 1 }}>
-          <Typography variant="h6" component="div">
-            <img
-              src={Logo}
-              alt="Logo"
-              style={{ maxWidth: "80%", maxHeight: "100%", width: "auto", height: "auto" }}
-            />
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", flexGrow: 1 }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button color="inherit" size="small" onClick={() => handleButtonClick("/home")} sx={{ mx: 1, marginRight: "100px",fontSize: "16px", fontWeight: "bold" }}>
-              Home
-            </Button>
-            <Button color="inherit" size="small" onClick={() => handleButtonClick("/about")} sx={{ mx: 1 , marginRight: "100px",fontSize: "16px", fontWeight: "bold" }}>
-              About
-            </Button>
-            <Button color="inherit" size="small" onClick={() => handleButtonClick("/testimonials")} sx={{ mx: 1 , marginRight: "100px",fontSize: "16px", fontWeight: "bold" }}>
-              Testimonials
-            </Button>
-            <Button color="inherit" size="small" onClick={() => handleButtonClick("/contact")} sx={{ mx: 1  , marginRight: "100px",fontSize: "16px", fontWeight: "bold"}}>
-              Contact
-            </Button>
-            <Button color="inherit" size="small" onClick={() => handleButtonClick("/cart")} sx={{ mx: 1 , marginRight: "100px" ,fontSize: "16px", fontWeight: "bold"}}>
-              Cart
-            </Button>
-            <Box sx={{ mx: 1 }}>
-            <Button
-    color="inherit"
-    variant="outlined"
-    size="small"
-    style={{ backgroundColor: "#fff", color: "#000", borderRadius: "20px", fontSize: "16px", fontWeight: "bold", width: "150px", height:"50px" }}
-    onClick={() => handleButtonClick("/order")}
-  >
-    Order Now
-  </Button>
-            </Box>
-          </Box>
-        </Box>
-      </Toolbar>
-    </AppBar>
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
+        border: "2px solid white",
+        background: " #FFEE58",
+        zIndex: 9999,
+        
+      }}
+    >
+      <List sx={{ display: "flex" }}>
+        <ListItem sx={{ marginRight: "auto" }}>
+          <img src="/path/to/your/logo.png" alt="Logo" style={{ height: 50 }} />
+        </ListItem>
+        {menuOptions.map((item) => (
+          <ListItem
+            key={item.text}
+            onMouseEnter={() => setOpenMenu(item.text)}
+            onMouseLeave={() => setOpenMenu(null)}
+            sx={{
+              marginRight: 5,
+              cursor: "pointer",
+            }}
+          >
+            <ListItemText primary={item.text} />
+            {openMenu === item.text && (
+              <List
+                sx={{
+                  position: "absolute",
+                  top: "100%",
+                  left: 0,
+                  padding: "10px",
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  background:"#FAFAFA",
+                  width: "200px", 
+                  height: "160px", 
+                  overflow: "auto",
+                }}
+              >
+                {item.submenus.map((submenu) => (
+                  <ListItem
+                    component="a"
+                    href={submenu.link}
+                    onClick={() => setOpenMenu(null)}
+                    key={submenu.text}
+                    sx={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    <ListItemText primary={submenu.text} />
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </ListItem>
+        ))}
+        <ListItem>
+          <Button variant="contained" color="primary">
+            Join Our Community
+          </Button>
+        </ListItem>
+      </List>
+    </nav>
   );
 };
 
