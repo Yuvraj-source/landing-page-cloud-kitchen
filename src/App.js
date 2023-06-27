@@ -6,6 +6,7 @@ import Work from './Components/Work';
 import Testimonial from './Components/Testimonials';
 import Contact from './Components/Contact';
 import Footer from './Components/Footer';
+import FloatingMenuButton from './Components/FloatingMenu';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Home/>
           <About/>
       <Work/>
+      <FloatingMenuButton/>
       <Testimonial/>
       <Contact/>
      <Footer/>
