@@ -4,7 +4,7 @@ This repository contains a landing page for a cloud kitchen, developed using Rea
 
 ## Hosting
 
-The landing page is hosted on Netlify. You can view the hosted version [here](https://master--guileless-frangipane-21188b.netlify.app/).
+The landing page is hosted on Netlify. You can view the hosted version [here](https://master--timely-jelly-5304b3.netlify.app/).
 
 
 ## Technologies Used
